@@ -16,7 +16,7 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 """
 
-import csv
+import csv, re
 
 print("""
 composer.py Copyright (C) 2021 Adam Livay
@@ -34,8 +34,8 @@ with open(input('Tune-Up data path (*.csv) >>> '),encoding="utf-8") as tuneups, 
     write_out=csv.writer(merge)
     write_out.writerow(['salutation','par1','par2','par3'])
     for row in read_in:
-        if row[0] not in ('Timestamp',''): # first row is a header, last few have weird content
-            par = ['' for z in range(n)] # array will contain n paragraphs to send to merge.csv
+        if row[0] not in ('Timestamp',''): # first row is a header, last few have weird content; one statement to cut out both
+            par = ['' for z in range(#n)] # array will contain that many paragraphs to send to merge.csv
             
             # paragraph 0: salutation
             # take contents of field 2 (third one over) and spit it out with the
@@ -56,7 +56,8 @@ with open(input('Tune-Up data path (*.csv) >>> '),encoding="utf-8") as tuneups, 
             # if two...
             elif int(row[17])==2:
                 # if both Alane and Belina...
-                if coaches == ['Alane Humrich','Belina Meador']: par[1] = "Belina Meador and I"
+                if coaches == ['Alane Humrich','Belina Meador']:
+                    par[1] = "Belina Meador and I"
                 # else if Alane but not Belina...
                 elif ('Alane Humrich' in coaches) and not ('Belina Meador' in coaches):
                     coaches.remove('Alane Humrich')
@@ -81,5 +82,72 @@ with open(input('Tune-Up data path (*.csv) >>> '),encoding="utf-8") as tuneups, 
                 # else if no staff, just volunteers...
                 else:
                     par[1] = f"our Volunteer Energy Coaches, {', '.join(coaches[:-1])}, and coaches[-1]"
+
+            # paragraphs 2 through 8: list of seven actions that were done
+            # initialize seven slots; initialize unbounded working list
+            listof7 = ["" for z in range 7]; working = []
+
+            # lightbulb count
+            working.append(f"Installed {row[163]} LED light bulbs, which last up to 25x longer than incandescent bulbs")
+            # gasket count
+            working.append(f"Identified and sealed air leaks surrounding outlets and switches on walls by installing {row[165]} gaskets")
+            
+            # aerator statements: data gathering
+            # flag for whether kitchen aerator install or cleaning mentioned
+            ki_ae_ins = bool(re.search('Installed.*aerator',row[171]))
+            ki_ae_cln = bool(re.search('Cleaned.*aerator',row[171]))
+            # counter for bathroom aerator install or cleaning mentions
+            br_ae_ins = 0
+            br_ae_cln = 0
+            for c in (204,221,238,255,272):
+                if re.search('Installed.*aerator',row[c]): br_ae_ins +=1
+                if re.search('Cleaned.*aerator',row[c]): br_ae_cln +=1
+            # composition
+            if ki_ae_ins or br_ae_ins:
+                working.append(f"Installed a new water-saving aerator on your "
+                               "{'kitchen' if ki_ae_ins}{' and' if ki_ae_ins and br_ae_ins}{'bathroom' if br_ae_ins} "
+                               "sink faucet{'s' if (br_ae_ins > 1) or (ki_ae_ins and br_ae_ins)}")
+                working.append(f"Cleaned and reinstalled the existing aerator{'s' if (br_ae_cln > 1) or (ki_ae_cln and br_ae_cln)} on your "
+                               "{'kitchen' if ki_ae_cln}{' and' if ki_ae_cln and br_ae_cln}{'bathroom' if br_ae_cln} "
+                               "sink faucet{'s' if (br_ae_cln > 1) or (ki_ae_cln and br_ae_cln)}")
+
+            # fridge coil cleaning statement
+            if 'Cleaned/vacuumed coils' in row[177]:
+                working.append("Inspected and cleaned refrigerator coils to increase the refrigerator’s efficiency and lifetime")
+
+            # thermometer card statement
+            if "Installed stick-on thermometer" in row[177]:
+                working.append("Installed a stick-on thermometer in the refrigerator to monitor temperature for food safety and energy efficiency.")
+
+            # toilet tank bank statement: data gathering
+            totaba = 0
+            for c in (202,219,236,253,270):
+                if "Installed water displacement bag in tank" in row[c]: totaba += 1
+            # composition
+            if totaba:
+                working.append("Installed {'a ' if totaba == 1}water displacement bag{'s' if totaba > 1} "
+                               "in your toilet tank{'s' if totaba > 1} to conserve water on every flush")
+
+            # showerhead statement: data gathering
+            shead = 0
+            for c in (208,225,242,256,276):
+                if re.search('Installed.*shower head',row[c]): shead +=1
+            # composition
+            if shead:
+                working.append("Installed {'a ' if shead == 1}1.5 gallon per minute water-saving showerhead{'s' if shead > 1} "
+                               "to save water, wastewater, and energy costs")
+
+            # refrigerator and water heater temperatures
+            badfridge = row[174]<36 or 40<row[174]
+            badheater = row[283]!=120
+            tempissues = ''
+            if badheater or badfridge:
+                tempissues = f" Your {'refrigerator' if badfridge}{' and ' if badfridge and badheater}{'hot water' if badheater} temperature"
+                tempissues += f"{'s are' if badfridge and badheater else ' is'} not set correctly. See the recommendation section."
+            working.append(f"Checked the temperature of your refrigerator ({row[174]}°F) and hot water ({row[283]}°F) for safety and efficiency."+tempissues)
+            
+
+            # clip to seven for output
+            listof7[:min(len(working),7)]=working
 
             write_out.writerow(par) # put the paragraphs in that CSV
