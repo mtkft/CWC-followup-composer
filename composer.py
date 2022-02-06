@@ -88,11 +88,18 @@ with open(input('Tune-Up data path (*.csv) >>> '),encoding="utf-8") as tuneups, 
             listof7 = ["" for z in range 7]; working = []
 
             # lightbulb count
-            working.append(f"Installed {row[163]} LED light bulbs, which last up to 25x longer than incandescent bulbs")
-            # gasket count
-            working.append(f"Identified and sealed air leaks surrounding outlets and switches on walls by installing {row[165]} gaskets")
+            # check applicability before composing
+            if row[163]: # condition clears if neither blank nor zero
+                # compose
+                working.append(f"Installed {row[163]} LED light bulbs, which last up to 25x longer than incandescent bulbs")
             
-            # aerator statements: data gathering
+            # gasket count
+            # check applicability before composing
+            if row[165]: # clears if neither blank nor zero
+                # compose
+                working.append(f"Identified and sealed air leaks surrounding outlets and switches on walls by installing {row[165]} gaskets")
+            
+            # aerator/showerhead statements: data gathering
             # flag for whether kitchen aerator install or cleaning mentioned
             ki_ae_ins = bool(re.search('Installed.*aerator',row[171]))
             ki_ae_cln = bool(re.search('Cleaned.*aerator',row[171]))
@@ -102,14 +109,48 @@ with open(input('Tune-Up data path (*.csv) >>> '),encoding="utf-8") as tuneups, 
             for c in (204,221,238,255,272):
                 if re.search('Installed.*aerator',row[c]): br_ae_ins +=1
                 if re.search('Cleaned.*aerator',row[c]): br_ae_cln +=1
-            # composition
+            # aggregate previous aerator gpm data, if available
+            pagpm = []
+            for c in (172,205,222,239,256,273):
+                if row[c]: # try to add it if it's blank
+                    try: pagpm.append(float(row[c])) # add it if it's a number
+                    except: pass # if for some reason it's not a number, forget about it
+            # counter for showerhead install mentions
+            shead = 0
+            for c in (208,225,242,259,276):
+                if re.search('Installed.*shower head',row[c]): shead +=1
+            # aggregate previous aerator gpm data, if available
+            psgpm = []
+            for c in (209,226,243,260,276):
+                if row[c]: # try to add it if it's blank
+                    try: psgpm.append(float(row[c])) # add it if it's a number
+                    except: pass # if for some reason it's not a number, forget about it
+            # compose installs, checking first if even applicable
+            ins_stmt = 'Installed ' if ki_ae_ins or br_ae_ins or shead else ''
             if ki_ae_ins or br_ae_ins:
-                working.append(f"Installed a new water-saving aerator on your "
-                               "{'kitchen' if ki_ae_ins}{' and' if ki_ae_ins and br_ae_ins}{'bathroom' if br_ae_ins} "
-                               "sink faucet{'s' if (br_ae_ins > 1) or (ki_ae_ins and br_ae_ins)}")
+                ins_stmt += f"{'a ' if (ki_ae_ins and not br_ae_ins) or (br_ae_ins == 1 and not ki_ae_ins)}new water-saving "
+                            f"aerator{'s' if (br_ae_ins > 1) or (ki_ae_ins and br_ae_ins)} on your "
+                            f"{'kitchen' if ki_ae_ins}{' and' if ki_ae_ins and br_ae_ins}{'bathroom' if br_ae_ins} "
+                            f"sink faucet{'s' if (br_ae_ins > 1) or (ki_ae_ins and br_ae_ins)}"
+                #if exactly one datum about prev gpm, mention
+                if len(pagpm) == 1: ins_stmt += f", saving you {pagpm[0]-0.5} gallons per minute of use"
+                #else, something generic
+                else: ins_stmt += ", saving you water with every use"
+            if (ki_ae_ins or br_ae_ins) and shead: ins_stmt += ', plus '
+            if shead:
+                ins_stmt += f"{'a ' if shead == 1}1.5 gallon per minute water-saving showerhead{'s' if shead > 1} "
+                            "to save water, wastewater, and energy costs"
+                #if exactly one datum about prev gpm, mention
+                if len(psgpm) == 1: ins_stmt += f", saving you {pagpm[0]-1.5} gallons per minute of use"
+                #else, something generic
+                else: ins_stmt += ", saving you water with every use"
+            # finally, append composed items about installs to working list if they exist
+            if ins_stmt: working.append(ins_stmt)
+            # compose cleanings, checking first if even applicable
+            if ki_ae_cln or br_ae_cln:
                 working.append(f"Cleaned and reinstalled the existing aerator{'s' if (br_ae_cln > 1) or (ki_ae_cln and br_ae_cln)} on your "
-                               "{'kitchen' if ki_ae_cln}{' and' if ki_ae_cln and br_ae_cln}{'bathroom' if br_ae_cln} "
-                               "sink faucet{'s' if (br_ae_cln > 1) or (ki_ae_cln and br_ae_cln)}")
+                               f"{'kitchen' if ki_ae_cln}{' and' if ki_ae_cln and br_ae_cln}{'bathroom' if br_ae_cln} "
+                               f"sink faucet{'s' if (br_ae_cln > 1) or (ki_ae_cln and br_ae_cln)}")
 
             # fridge coil cleaning statement
             if 'Cleaned/vacuumed coils' in row[177]:
@@ -124,27 +165,18 @@ with open(input('Tune-Up data path (*.csv) >>> '),encoding="utf-8") as tuneups, 
             for c in (202,219,236,253,270):
                 if "Installed water displacement bag in tank" in row[c]: totaba += 1
             # composition
-            if totaba:
-                working.append("Installed {'a ' if totaba == 1}water displacement bag{'s' if totaba > 1} "
-                               "in your toilet tank{'s' if totaba > 1} to conserve water on every flush")
-
-            # showerhead statement: data gathering
-            shead = 0
-            for c in (208,225,242,256,276):
-                if re.search('Installed.*shower head',row[c]): shead +=1
-            # composition
-            if shead:
-                working.append("Installed {'a ' if shead == 1}1.5 gallon per minute water-saving showerhead{'s' if shead > 1} "
-                               "to save water, wastewater, and energy costs")
+            if totaba: #fires if nonzero
+                working.append(f"Installed {'a ' if totaba == 1}water displacement bag{'s' if totaba > 1} "
+                               f"in your toilet tank{'s' if totaba > 1} to conserve water on every flush")
 
             # refrigerator and water heater temperatures
             badfridge = row[174]<36 or 40<row[174]
             badheater = row[283]!=120
-            tempissues = ''
+            temp_stmt = f"Checked the temperature of your refrigerator ({row[174]}°F) and hot water ({row[283]}°F) for safety and efficiency."
             if badheater or badfridge:
-                tempissues = f" Your {'refrigerator' if badfridge}{' and ' if badfridge and badheater}{'hot water' if badheater} temperature"
-                tempissues += f"{'s are' if badfridge and badheater else ' is'} not set correctly. See the recommendation section."
-            working.append(f"Checked the temperature of your refrigerator ({row[174]}°F) and hot water ({row[283]}°F) for safety and efficiency."+tempissues)
+                temp_stmt += f" Your {'refrigerator' if badfridge}{' and ' if badfridge and badheater}{'hot water' if badheater} temperature"
+                             f"{'s are' if badfridge and badheater else ' is'} not set correctly. See the recommendation section."
+            working.append(temp_stmt)
             
 
             # clip to seven for output
