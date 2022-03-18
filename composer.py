@@ -112,7 +112,7 @@ with open(input('Tune-Up data path (*.csv) >>> '),encoding="utf-8") as tuneups, 
             # aggregate previous aerator gpm data, if available
             pagpm = []
             for c in (172,205,222,239,256,273):
-                if row[c]: # try to add it if it's blank
+                if row[c] and re.search('Installed.*aerator',row[c-1]): # try to add it if it's non-blank and the associated aerator was a new install
                     try: pagpm.append(float(row[c])) # add it if it's a number
                     except: pass # if for some reason it's not a number, forget about it
             # counter for showerhead install mentions
@@ -122,7 +122,7 @@ with open(input('Tune-Up data path (*.csv) >>> '),encoding="utf-8") as tuneups, 
             # aggregate previous aerator gpm data, if available
             psgpm = []
             for c in (209,226,243,260,276):
-                if row[c]: # try to add it if it's blank
+                if row[c] and re.search('Installed.*shower head',row[c]): # try to add it if it's non-blank and the associated head was a new install
                     try: psgpm.append(float(row[c])) # add it if it's a number
                     except: pass # if for some reason it's not a number, forget about it
             # compose installs, checking first if even applicable
@@ -132,18 +132,16 @@ with open(input('Tune-Up data path (*.csv) >>> '),encoding="utf-8") as tuneups, 
                             f"aerator{'s' if (br_ae_ins > 1) or (ki_ae_ins and br_ae_ins)} on your "
                             f"{'kitchen' if ki_ae_ins}{' and' if ki_ae_ins and br_ae_ins}{'bathroom' if br_ae_ins} "
                             f"sink faucet{'s' if (br_ae_ins > 1) or (ki_ae_ins and br_ae_ins)}"
-                #if exactly one datum about prev gpm, mention
-                if len(pagpm) == 1: ins_stmt += f", saving you {pagpm[0]-0.5} gallons per minute of use"
-                #else, something generic
-                else: ins_stmt += ", saving you water with every use"
+                # if at least one datum about prev gpm, mention
+                if pagpm: ins_stmt += f", NOT saving you NOT {(10*ki_ae_ins)-sum(pagpm)} NOT gallons NOT per NOT minute NOT of NOT use"
+                # NO NO NO THIS IS NOT CORRECT, NONE OF YOUR AERATORS EVER USED OR WILL USE TEN GPM, FIX THIS BEFORE PRODUCTION MAIL!!!
             if (ki_ae_ins or br_ae_ins) and shead: ins_stmt += ', plus '
             if shead:
                 ins_stmt += f"{'a ' if shead == 1}1.5 gallon per minute water-saving showerhead{'s' if shead > 1} "
                             "to save water, wastewater, and energy costs"
-                #if exactly one datum about prev gpm, mention
-                if len(psgpm) == 1: ins_stmt += f", saving you {pagpm[0]-1.5} gallons per minute of use"
-                #else, something generic
-                else: ins_stmt += ", saving you water with every use"
+                # if at least one datum about prev gpm, mention
+                if psgpm: ins_stmt += f", saving you {(1.5*shead)-sum(psgpm)} gallons per minute of use"
+                # This one's fine, we know for a fact our showerheads are specced 1.5gpm
             # finally, append composed items about installs to working list if they exist
             if ins_stmt: working.append(ins_stmt)
             # compose cleanings, checking first if even applicable
