@@ -1,0 +1,349 @@
+Inspection_Form_v1.0-start
+Survey End Time
+Survey Date
+Device ID
+Subsriber ID
+SIM Card Serial #
+Phone Number
+Username
+Email
+Case Number
+Resident Name
+Phone
+Email
+Street
+City
+Zip Code
+Start Time
+How many energy coaches
+Name
+Name
+Name
+Name
+Name
+Dwelling is
+Dwelling Type
+Other Dwelling
+Dwelling Type Picture
+Check all that apply
+Is the resident a Homeowner or Renter
+Number of Residents in Household
+Dwelling Comments
+Utility Bill Review
+# of Utility Providers
+Electric Meter Number
+Electric Utility Provider
+Electric meter # verified on bill
+Water Meter Number
+Water Utility Provider
+Water meter # verified on bill
+Gas Meter Number
+Gas Utility Provider
+Gas meter # verified on bill
+Water supply
+Wastewater disposal
+Is the leak detector spinning when all water in house is shut off?
+What related recommendations were made to the resident?
+Garbage Can Size
+Does the Resident Recycle?
+Utilities Comments
+Utilities Picture
+Building Envelope Drawing
+# Standard Doors
+# Sliding Doors
+What problems have you identified?
+What related suggestions were made to the resident?
+Doors Comments
+Doors Picture
+Number of windows
+Window type
+Window style
+What problems have you identified?
+What related suggestions were made to the resident?
+Other window type
+# of reported window malfunctions
+Comments on windows
+Windows Picture
+Check all that apply.
+What problems have you identified?
+What related suggestions were made to the resident?
+"Insulation type (floor)"
+Other insulation type
+What problems have you identified?
+What related suggestions were made to the resident?
+Attic Venting Type
+What problems have you identified?
+What related suggestions were made to the resident?
+What problems have you identified?
+What related suggestions were made to the resident?
+Roof Type
+Approximate Age of roof?
+General Exterior
+Roof, Attic Venting and General Exterior Comments
+Outdoors Picture 1
+Outdoors Picture 2
+Outdoors Picture 3
+Does the resident have central heating/cooling?
+Photo of specs
+Photo of unit
+"What problems have you identified? condenser coil"
+What related suggestions were made to the resident?
+"What problems have you identified? refrigerant line"
+What related suggestions were made to the resident?
+Central A/C Outdoor Components Comments
+Central A/C Outdoor Components Picture 1
+Central A/C Outdoor Components Picture 2
+"What problems have you identified? outdoor plumbing"
+What related suggestions were made to the resident?
+Does the resident have outdoor irrigation?
+What problems have you identified?
+What related suggestions were made to the resident?
+"What problems have you identified? Outdoor lighting"
+What related suggestions were made to the resident?
+Does the resident have a pool pump?
+What problems have you identified?
+What related suggestions were made to the resident?
+Outdoor Component Comments
+Outdoor Component Picture
+How many window/wall AC units are there?
+Photo of window/wall AC unit specs
+Photo of window/wall AC unit
+Photo of window/wall AC unit specs
+Photo of window/wall AC unit
+Photo of window/wall AC unit specs
+Photo of window/wall AC unit
+Photo of window/wall AC unit specs
+Photo of window/wall AC unit
+Photo of window/wall AC unit specs
+Photo of window/wall AC unit
+What problems have you identified?
+What related suggestions were made to the resident?
+Window/Wall AC Unit Comments
+Additional Picture 1
+Additional Picture 2
+Air Handler: Gas or Electric
+Programmable Thermostat?
+Prog- rammed already?
+Current thermostat setting
+Return air temp
+Output air temp
+Photo of Air Handler specs
+Photo of Air Handler
+Reported (or estimated) age of unit?
+Reported (or estimated) date of last servicing
+What problems have you identified?
+What related suggestions were made to the resident?
+"What problems have you identified? Air Handler Filter"
+What related actions or suggestions were made to the resident?
+Filter Size
+Heating fuel type
+What problems have you identified?
+What related actions or suggestions were made to the resident?
+Any additional comments or concerns regarding heating, ventilation or cooling?
+Additional Picture 1
+Additional Picture 2
+What is the insulation status?
+What type of insulation is present?
+Specify other
+
+"What is the insulation material? (Specification w/ photos)"
+
+What is the average depth of the insulation? (inches)
+What is the r value?
+What insulation related problems are present?
+What insulation related suggestions were made to the resident?
+Any additional comments or concerns regarding attic insulation?
+Attic Insulation Picture
+What is the duct work status?
+Duct work problems
+What duct work related suggestions were made to the resident?
+Any additional comments or concerns regarding attic duct work?
+Attic Duct Picture
+What problems have you identified?
+What related suggestions were made to the resident?
+# of LEDs installed
+# of Fluorescent tube lighting present in home
+Installed switch & outlet gaskets
+Any additional comments or concerns regarding lighting or gaskets?
+Lighting Picture
+"Gas or Electric Range"
+What problems have you identified?
+What related actions or suggestions were made to the resident?
+Previous gpm of aerator?
+Photo of fridge
+Photo of fridge specs
+Current measured temperature (°F)
+Current temperature setting
+What problems have you identified?
+"What actions or performed, or related suggestions were made to the resident? (were fridge coils cleaned?)"
+Is there a separate freezer or additional fridge?
+Is there a dishwasher?
+Recommended setting temperature to
+Adjusted fridge setting to
+Photo of extra unit
+Photo of specs
+# of extra fridge(s)
+# of extra freezer(s)
+Is the extra fridge or freezer in an unconditioned space, such as a porch or garage?
+Discussed impact of these on electric bill and recommended downsizing if not full
+"What problems have you identified? (DISHWASHER?)"
+What related suggestions were made to the resident?
+Any additional comments or concerns regarding the kitchen?
+Additional Picture 1
+Additional Picture 2
+Additional Picture 3
+How many bathrooms are located within the house?
+What is the location for this bathroom?
+bath_b1_location_label
+Specify other
+What is the bathroom type?
+Placed leak tabs in commode and allowed at least 10 minutes for activation
+What BATH 1 toilet related problems are present?
+What BATH 1 toilet related suggestions were made or what actions were taken?
+What was gpf marking for the toilet?
+What B1 sink related problems are present?
+What B1 sink related suggestions were made or what actions were taken?
+Previous gpm of aerator
+What bath 1 shower/tub related problems are present?
+What B1 shower/tub related suggestions were made or what actions were taken?
+Previous gpm of showerhead?
+Any additional comments or concerns regarding Bath 1?
+Additional Picture 1
+Additional Picture 2
+What is the location for this bathroom?
+bath_b2_location_label
+Specify other
+What is the bathroom type?
+Placed leak tabs in commode and allowed at least 10 minutes for activation
+What ${bath_b2_location_label} toilet related problems are present?
+What Bath 2  toilet related suggestions were made or what actions were taken?
+What was gpf marking for the toilet?
+What {B2} sink related problems are present?
+What {B2} sink related suggestions were made or what actions were taken?
+Previous gpm of aerator
+What b2 shower/tub related problems are present?
+What {b2} shower/tub related suggestions were made or what actions were taken?
+Previous gpm of shower- head?
+Any additional comments or concerns regarding the {b2}?
+Additional Picture 1
+Additional Picture 2
+What is the location for this bathroom?
+bath_b3_location_label
+Specify other
+What is the bathroom type?
+Placed leak tabs in commode and allowed at least 10 minutes for activation
+What ${bath_b3_location_label} toilet related problems are present?
+What ${bath_b3_location_label} toilet related suggestions were made or what actions were taken?
+What was gpf marking for the toilet?
+What ${bath_b3_location_label} sink related problems are present?
+What ${bath_b3_location_label} sink related suggestions were made or what actions were taken?
+Previous gpm of aerator
+What ${bath_b3_location_label} shower/tub related problems are present?
+What ${bath_b3_location_label} shower/tub related suggestions were made or what actions were taken?
+Previous gpm of showerhead?
+Any additional comments or concerns regarding the ${bath_b3_location_label}?
+Additional Picture 1
+Additional Picture 2
+What is the location for this bathroom?
+bath_b4_location_label
+Specify other
+What is the bathroom type?
+Placed leak tabs in commode and allowed at least 10 minutes for activation
+What ${bath_b4_location_label} toilet related problems are present?
+What ${bath_b4_location_label} toilet related suggestions were made or what actions were taken?
+What was gpf marking for the toilet?
+What ${bath_b4_location_label} sink related problems are present?
+What ${bath_b4_location_label} sink related suggestions were made or what actions were taken?
+Previous gpm of aerator
+What ${bath_b4_location_label} shower/tub related problems are present?
+What ${bath_b4_location_label} shower/tub related suggestions were made or what actions were taken?
+Previous gpm of showerhead?
+Any additional comments or concerns regarding the ${bath_b4_location_label}?
+Additional Picture 1
+Additional Picture 2
+What is the location for this bathroom?
+bath_b5_location_label
+Specify other
+What is the bathroom type?
+Placed leak tabs in commode and allowed at least 10 minutes for activation
+What ${bath_b5_location_label} toilet related problems are present?
+What ${bath_b5_location_label} toilet related suggestions were made or what actions were taken?
+What was gpf marking for the toilet?
+What ${bath_b5_location_label} sink related problems are present?
+What ${bath_b5_location_label} sink related suggestions were made or what actions were taken?
+Previous gpm of aerator
+What ${bath_b5_location_label} shower/tub related problems are present?
+What ${bath_b5_location_label} shower/tub related suggestions were made or what actions were taken?
+Previous gpm of showerhead?
+Any additional comments or concerns regarding the ${bath_b5_location_label}?
+Additional Picture 1
+Additional Picture 2
+Water Heater Type
+Photo of Water Heater specs
+Photo of Water Heater
+"Current measured temperature. *Measure at faucet closest to water heater with dial thermometer"
+Adjusted water heater temperature to
+What problems have you identified?
+What related suggestions were made to the resident?
+Current setting of unit? (e.g. "warm")
+Select all that apply.
+What problems have you identified?
+What related suggestions were made to the resident?
+Gas or Electric
+What problems have you identified?
+What related suggestions were made to the resident?
+What is the utility sink status?
+What problems have you identified?
+What related suggestions were made to the resident?
+Any additional comments or concerns regarding the water heater, washer, dryer or utility sink?
+Additional Picture 1
+Additional Picture 2
+Additional Picture 3
+Does resident have working smoke detectors in the home?
+Does resident have ANY gas appliances in the household? (range, air handler, water heater)
+Did you install a plug-in Carbon Monoxide detector?
+Low (or dead) battery on smoke detector; replaced 9 volt battery
+If non-working smoke detector, resident was advised to apply for a free smoke detector (leave form from resident info packet)
+Why was the resident not advised to apply for a free smoke detector?
+Any additional safety check comments or concerns?
+Additional Picture 1
+Checklist
+Resident committed to
+Energy Coach 1 Hours
+Energy Coach 2 Hours
+Energy Coach 3 Hours
+Hours for ${energy_coach_4_name}
+Hours ${energy_coach_5_name}
+End Time
+Evaluation of severity or urgency of identified issues
+Comments
+General repair needs
+Appliances needing replacement
+Water Heater details
+What is the r value?
+Plumbing leak details
+Number of window repair/ replacement(s)
+Number of screen repair/replace-ment(s)
+Other appliances needing replacement
+Other repair needs
+Active leak
+Number of door repair/ replacement(s)
+Comments on any of the previous page items
+Anything special the CWC needs to know about the family or home?
+If there was an accident on site, fill out the accident form in the kit and contact CWC staff.
+Inspection_Form_v1.0-meta-instanceID
+Inspection_Form_v1.0-meta-instanceName
+
+
+
+
+
+
+
+
+
+
+
+
+
+
